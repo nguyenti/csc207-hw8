@@ -66,8 +66,20 @@ class Utils {
      */
     public static <T> T[] merge(Comparator<T> order, T[] a1, int lb1, 
             int ub1, T[] a2, int lb2, int ub2) {
-        // STUB
-        return null;
+        T[] result = (T[]) new Object[ub1+ub2];
+        int i = 0;
+        while(lb1<ub1 && lb2<ub2)
+        //if the first value in a1 is less than a2's first val
+        if(order.compare(a1[lb1], a2[lb2]) < 0){ 
+            result[i] = a1[lb1];
+            i++;
+            merge(order, a1, lb1+1, ub1, a2, lb2, ub2);
+        } else if(order.compare(a1[lb1], a2[lb2]) >= 0){ 
+            result[i] = a2[lb2];
+            i++;
+            merge(order, a1, lb1, ub1, a2, lb2+1, ub2);
+        } // if
+        return result;
     } // merge(Comparator<T>, T[], int, int, T[], int, int)
 
     /**
