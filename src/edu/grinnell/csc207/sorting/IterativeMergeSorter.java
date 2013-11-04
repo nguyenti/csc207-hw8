@@ -13,6 +13,10 @@ public class IterativeMergeSorter<T> extends SorterBridge<T> {
    /**
     * Sort vals using iterative merge sort.  See the Sorter<T> interface
     * for additional details.
+    * 
+    * Invariant:
+    * 	
+    * 
     */
    @Override
    public T[] sorti(T[] vals, Comparator<T> order) {

@@ -41,6 +41,8 @@ class Utils {
      *    sorted(merged, order).
      * @post
      *    merged is a permutation of the concatenation of a1 and a2.
+     * Invariant:
+     * 	
      */
     public static <T> T[] merge(Comparator<T> order, T[] a1, T[] a2) {
          return merge(order, a1, 0, a1.length, a2, 0, a2.length);
