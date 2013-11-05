@@ -11,7 +11,9 @@ import java.util.Random;
  * to help with testing or experiments.
  * 
  * @author Samuel A. Rebelsky
- * @author Your Name Here
+ * @author Tiffany Nguyen
+ * @author Mark Lewis
+ * @author John Brady
  */
 class Utils {
 

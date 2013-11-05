@@ -7,8 +7,13 @@ import org.junit.Test;
 public class IterativeMergeSorterTest {
 
     @Test
-    public void test() {
-	fail("Not yet implemented");
-    }
+    public void test1() {
+	TestUtils.test1(new IterativeMergeSorter<Integer>());
+    } // test1
+
+    @Test
+    public void test2() {
+	TestUtils.test2(new IterativeMergeSorter<Integer>());
+    } // test2
 
 }
