@@ -41,27 +41,29 @@ class Utils {
      * 
      */
     public static <T> T[] merge(Comparator<T> order, T[] a1, T[] a2) {
-	T[] result = (T[]) new Object[a1.length+a2.length];
-	int m = 0, n = 0, count = 0;
-	while(m<a1.length && n<a2.length) {
+	T[] result = (T[]) new Object[a1.length + a2.length];
+	int m = 0;
+	int n = 0;
+	int count = 0;
+	while (m < a1.length && n < a2.length) {
 	    if (order.compare(a1[m], a2[n]) < 0) {
 		result[count++] = a1[m++];
-	    } else if (order.compare(a1[m], a2[n]) >=0) {
+	    } else if (order.compare(a1[m], a2[n]) >= 0) {
 		result[count++] = a2[n++];
 	    } // if
 	} // while
-	if (m!= a1.length){
-	    while(m<a1.length){
-		result[count++]=a1[m++];
+	if (m != a1.length) {
+	    while (m < a1.length) {
+		result[count++] = a1[m++];
 	    } // while
 	} // if
-	if (n!= a2.length){
-	    while(n<a2.length){
-		result[count++]=a2[n++];
+	if (n != a2.length) {
+	    while (n < a2.length) {
+		result[count++] = a2[n++];
 	    } // while
 	} // if
 	return result;
-	
+
     } // merge(Comparator<T>, T[], T[])
 
     /**
@@ -108,8 +110,8 @@ class Utils {
      * @pre 0 <= l <= values.length
      * @pre 0 <= u <= values.length
      */
-    public static <T> boolean sorted(T[] values, Comparator<T> order,
-	    int l, int u) {
+    public static <T> boolean sorted(T[] values, Comparator<T> order, int l,
+	    int u) {
 	for (int i = u - 1; i > l; i--) {
 	    if (order.compare(values[i - 1], values[i]) > 0)
 		return false;
@@ -193,10 +195,9 @@ class Utils {
 	Integer[] vals1 = new Integer[] { 1, 2, 2, 2, 4, 5, 7, 7, 11, 13 };
 
 	// A case that's proven problematic
-	Integer[] vals2 = new Integer[] { 1, 1, 2, 3, 4, 5, 7, 9, 11, 13,
-		13, 0 };
-	checkSorting(pen, new Integer[] { 0, 1, 1, 2, 3, 4, 5, 7, 9, 11,
-		13, 13 }, vals2,
+	Integer[] vals2 = new Integer[] { 1, 1, 2, 3, 4, 5, 7, 9, 11, 13, 13, 0 };
+	checkSorting(pen,
+		new Integer[] { 0, 1, 1, 2, 3, 4, 5, 7, 9, 11, 13, 13 }, vals2,
 		sorter.sort(vals2, StandardIntegerComparator.comparator));
 
 	// Five random permutation experiments seems like enough
@@ -218,8 +219,8 @@ class Utils {
      */
     public static void sExperiments(Sorter<String> sorter) {
 	PrintWriter pen = new PrintWriter(System.out, true);
-	String[] vals1 = new String[] { "a", "b", "b", "f", "g", "g", "w",
-		"x", "y", "z", "z", "z" };
+	String[] vals1 = new String[] { "a", "b", "b", "f", "g", "g", "w", "x",
+		"y", "z", "z", "z" };
 	// Five random permutation experiments seems like enough
 	for (int i = 0; i < 5; i++) {
 	    permutationExperiment(pen, sorter,
