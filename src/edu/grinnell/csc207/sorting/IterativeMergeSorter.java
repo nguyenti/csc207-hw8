@@ -20,7 +20,7 @@ public class IterativeMergeSorter<T> extends SorterBridge<T> {
      * TEST THIS AND CHECK THE INVARIANT
      * 
      * Invariant:
-     *   subarrays of size size are sorted.
+     *   Subarrays of size size are sorted
      * 
      */
     @Override
