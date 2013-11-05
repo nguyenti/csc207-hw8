@@ -45,6 +45,8 @@ class Utils {
 	int m = 0;
 	int n = 0;
 	int count = 0;
+	// loop that will go through and return the smallest value from each
+	// array
 	while (m < a1.length && n < a2.length) {
 	    if (order.compare(a1[m], a2[n]) < 0) {
 		result[count++] = a1[m++];
@@ -52,6 +54,9 @@ class Utils {
 		result[count++] = a2[n++];
 	    } // if
 	} // while
+
+	// finishing moves, copy any leftover if one array is exhausted before
+	// the other
 	if (m != a1.length) {
 	    while (m < a1.length) {
 		result[count++] = a1[m++];
