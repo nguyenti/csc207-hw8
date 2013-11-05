@@ -31,14 +31,15 @@ class Utils {
     /**
      * Merge the values in arrays a1 and a2 into a new array.
      * 
+     * concept from this source: http://stackoverflow.com/questions
+     * /15629651/recursive-merge-sort-java-program
+     * 
      * @return merged, an array
      * 
      * @pre sorted(a1, order)
      * @pre sorted(a2, order)
      * @post sorted(merged, order).
      * @post merged is a permutation of the concatenation of a1 and a2.
-     *       Invariant:
-     * 
      */
     public static <T> T[] merge(Comparator<T> order, T[] a1, T[] a2) {
 	T[] result = (T[]) new Object[a1.length + a2.length];
