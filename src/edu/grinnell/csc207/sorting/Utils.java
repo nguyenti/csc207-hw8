@@ -31,7 +31,7 @@ class Utils {
     /**
      * Merge the values in arrays a1 and a2 into a new array.
      * 
-     * concept from this source: http://stackoverflow.com/questions
+     * concept from this source (and Sam's help): http://stackoverflow.com/questions
      * /15629651/recursive-merge-sort-java-program
      * 
      * @return merged, an array
