@@ -26,9 +26,31 @@ class Utils {
      */
     static Random generator = new Random();
 
+    /**
+     * field that indicates the count of the swaps, in order to analyze the
+     * number of steps(swaps);
+     */
+    static int count = 0;
+
     // +----------------+--------------------------------------------------
     // | Static Methods |
     // +----------------+
+
+    /**
+     * get the current count of swaps
+     */
+
+    public static int getCount() {
+	return count;
+    } // getCount
+
+    /**
+     * reset the count field to zero, for another test
+     */
+
+    public static void resetCount() {
+	count = 0;
+    } // resetCount
 
     /**
      * Merge the values in arrays a1 and a2 into a new array.
@@ -43,6 +65,10 @@ class Utils {
      * @pre sorted(a2, order)
      * @post sorted(merged, order).
      * @post merged is a permutation of the concatenation of a1 and a2.
+     * 
+     * @invariant both a1 and a2 still have unprocessed elements. That is, there
+     *            exists at least one value in both a1 and a2 that have yet to
+     *            be compared with one another.
      */
     public static <T> T[] merge(Comparator<T> order, T[] a1, T[] a2) {
 	T[] result = (T[]) new Object[a1.length + a2.length];
@@ -119,8 +145,8 @@ class Utils {
      * @pre 0 <= l <= values.length
      * @pre 0 <= u <= values.length
      */
-    public static <T> boolean sorted(T[] values, Comparator<T> order, int l,
-	    int u) {
+    public static <T> boolean sorted(T[] values, Comparator<T> order,
+	    int l, int u) {
 	for (int i = u - 1; i > l; i--) {
 	    if (order.compare(values[i - 1], values[i]) > 0)
 		return false;
@@ -162,6 +188,7 @@ class Utils {
 	T tmp = values[i];
 	values[i] = values[j];
 	values[j] = tmp;
+	count++;
     } // swap(T[], int, int)
 
     // +-------------+-----------------------------------------------------
@@ -204,9 +231,10 @@ class Utils {
 	Integer[] vals1 = new Integer[] { 1, 2, 2, 2, 4, 5, 7, 7, 11, 13 };
 
 	// A case that's proven problematic
-	Integer[] vals2 = new Integer[] { 1, 1, 2, 3, 4, 5, 7, 9, 11, 13, 13, 0 };
-	checkSorting(pen,
-		new Integer[] { 0, 1, 1, 2, 3, 4, 5, 7, 9, 11, 13, 13 }, vals2,
+	Integer[] vals2 = new Integer[] { 1, 1, 2, 3, 4, 5, 7, 9, 11, 13,
+		13, 0 };
+	checkSorting(pen, new Integer[] { 0, 1, 1, 2, 3, 4, 5, 7, 9, 11,
+		13, 13 }, vals2,
 		sorter.sort(vals2, StandardIntegerComparator.comparator));
 
 	// Five random permutation experiments seems like enough
@@ -228,8 +256,8 @@ class Utils {
      */
     public static void sExperiments(Sorter<String> sorter) {
 	PrintWriter pen = new PrintWriter(System.out, true);
-	String[] vals1 = new String[] { "a", "b", "b", "f", "g", "g", "w", "x",
-		"y", "z", "z", "z" };
+	String[] vals1 = new String[] { "a", "b", "b", "f", "g", "g", "w",
+		"x", "y", "z", "z", "z" };
 	// Five random permutation experiments seems like enough
 	for (int i = 0; i < 5; i++) {
 	    permutationExperiment(pen, sorter,
