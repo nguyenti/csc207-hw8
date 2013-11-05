@@ -56,6 +56,7 @@ public class SelectionSorter<T> extends SorterBridge<T> {
 	    if (order.compare(vals[lowest], vals[i]) > 0) {
 		lowest = i;
 	    } // if
+	    i++;
 	} // while
 	return lowest;
     } // indexOfSmallest(T[], Comparator<T>, int, int)
