@@ -41,27 +41,32 @@ class Utils {
      * 
      */
     public static <T> T[] merge(Comparator<T> order, T[] a1, T[] a2) {
-	T[] result = (T[]) new Object[a1.length+a2.length];
+	T[] result = (T[]) new Object[a1.length + a2.length];
 	int m = 0, n = 0, count = 0;
-	while(m<a1.length && n<a2.length) {
+	// loop that will go through and return the smallest value from each
+	// array
+	while (m < a1.length && n < a2.length) {
 	    if (order.compare(a1[m], a2[n]) < 0) {
 		result[count++] = a1[m++];
-	    } else if (order.compare(a1[m], a2[n]) >=0) {
+	    } else if (order.compare(a1[m], a2[n]) >= 0) {
 		result[count++] = a2[n++];
 	    } // if
 	} // while
-	if (m!= a1.length){
-	    while(m<a1.length){
-		result[count++]=a1[m++];
+
+	// finishing moves, copy any leftover if one array is exhausted before
+	// the other
+	if (m != a1.length) {
+	    while (m < a1.length) {
+		result[count++] = a1[m++];
 	    } // while
 	} // if
-	if (n!= a2.length){
-	    while(n<a2.length){
-		result[count++]=a2[n++];
+	if (n != a2.length) {
+	    while (n < a2.length) {
+		result[count++] = a2[n++];
 	    } // while
 	} // if
 	return result;
-	
+
     } // merge(Comparator<T>, T[], T[])
 
     /**
