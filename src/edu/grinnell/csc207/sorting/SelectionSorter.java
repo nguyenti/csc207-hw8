@@ -13,6 +13,9 @@ public class SelectionSorter<T> extends SorterBridge<T> {
     /**
      * Sort vals using selection sort. See Sorter<T> for more details.
      * Invariant: for every whole number < i, vals[i] is sorted
+     * 
+     * @invariant i has not iterated through all indexes of vals. all elements
+     *            before i will have been sorted.
      */
     @Override
     public T[] sorti(T[] vals, Comparator<T> order) {
@@ -41,6 +44,10 @@ public class SelectionSorter<T> extends SorterBridge<T> {
      * @post For all j, lb <= j < ub, order.compare(values[i], values[j]) <= 0.
      * @post values is not mutated Invariant: for every i, lb <= i
      *       order(vals[lowest], vals[i]) <= 0
+     * 
+     * 
+     * @invariant i is smaller than the upper bound ub. lowest will store the
+     *            index of the smallest value in vals thus far.
      */
     int indexOfSmallest(T[] vals, Comparator<T> order, int lb, int ub) {
 	int lowest = lb;

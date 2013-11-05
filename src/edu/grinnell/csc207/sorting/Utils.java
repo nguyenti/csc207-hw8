@@ -11,7 +11,9 @@ import java.util.Random;
  * to help with testing or experiments.
  * 
  * @author Samuel A. Rebelsky
- * @author Your Name Here
+ * @author Tiffany Nguyen
+ * @author Mark Lewis
+ * @author John Brady
  */
 class Utils {
 
@@ -31,18 +33,22 @@ class Utils {
     /**
      * Merge the values in arrays a1 and a2 into a new array.
      * 
+     * concept from this source (and Sam's help):
+     * http://stackoverflow.com/questions
+     * /15629651/recursive-merge-sort-java-program
+     * 
      * @return merged, an array
      * 
      * @pre sorted(a1, order)
      * @pre sorted(a2, order)
      * @post sorted(merged, order).
      * @post merged is a permutation of the concatenation of a1 and a2.
-     *       Invariant:
-     * 
      */
     public static <T> T[] merge(Comparator<T> order, T[] a1, T[] a2) {
 	T[] result = (T[]) new Object[a1.length + a2.length];
-	int m = 0, n = 0, count = 0;
+	int m = 0;
+	int n = 0;
+	int count = 0;
 	// loop that will go through and return the smallest value from each
 	// array
 	while (m < a1.length && n < a2.length) {
@@ -113,8 +119,8 @@ class Utils {
      * @pre 0 <= l <= values.length
      * @pre 0 <= u <= values.length
      */
-    public static <T> boolean sorted(T[] values, Comparator<T> order,
-	    int l, int u) {
+    public static <T> boolean sorted(T[] values, Comparator<T> order, int l,
+	    int u) {
 	for (int i = u - 1; i > l; i--) {
 	    if (order.compare(values[i - 1], values[i]) > 0)
 		return false;
@@ -198,10 +204,9 @@ class Utils {
 	Integer[] vals1 = new Integer[] { 1, 2, 2, 2, 4, 5, 7, 7, 11, 13 };
 
 	// A case that's proven problematic
-	Integer[] vals2 = new Integer[] { 1, 1, 2, 3, 4, 5, 7, 9, 11, 13,
-		13, 0 };
-	checkSorting(pen, new Integer[] { 0, 1, 1, 2, 3, 4, 5, 7, 9, 11,
-		13, 13 }, vals2,
+	Integer[] vals2 = new Integer[] { 1, 1, 2, 3, 4, 5, 7, 9, 11, 13, 13, 0 };
+	checkSorting(pen,
+		new Integer[] { 0, 1, 1, 2, 3, 4, 5, 7, 9, 11, 13, 13 }, vals2,
 		sorter.sort(vals2, StandardIntegerComparator.comparator));
 
 	// Five random permutation experiments seems like enough
@@ -223,8 +228,8 @@ class Utils {
      */
     public static void sExperiments(Sorter<String> sorter) {
 	PrintWriter pen = new PrintWriter(System.out, true);
-	String[] vals1 = new String[] { "a", "b", "b", "f", "g", "g", "w",
-		"x", "y", "z", "z", "z" };
+	String[] vals1 = new String[] { "a", "b", "b", "f", "g", "g", "w", "x",
+		"y", "z", "z", "z" };
 	// Five random permutation experiments seems like enough
 	for (int i = 0; i < 5; i++) {
 	    permutationExperiment(pen, sorter,
