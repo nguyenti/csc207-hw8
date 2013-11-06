@@ -96,22 +96,4 @@ public class IterativeMergeSorter<T> extends SorterBridge<T> {
 	return vals;
     } // sorti(T[], Comparator<T>)
 
-    private void inPlaceMerge(T[] array, int start, int middle, int end,
-	    Comparator<T> comparer) {
-	T[] merge = (T[]) new Object[end - start];
-	int l = 0, r = 0, i = 0;
-	while (l < (middle - start) && r < (end - middle)) {
-	    merge[i++] = comparer.compare(array[start + l], array[middle + r]) < 0 ? array[start
-		    + l++]
-		    : array[middle + r++];
-	}
-
-	while (r < end - middle)
-	    merge[i++] = array[middle + r++];
-
-	while (l < middle - start)
-	    merge[i++] = array[start + l++];
-
-	System.arraycopy(merge, 0, array, start, merge.length);
-    }
 } // IterativeMergeSorter<T>
