@@ -78,7 +78,7 @@ public class Quicksorter<T> extends SorterBridge<T> {
     * 	all unproccessed values are between these processed values
     */
    int partition(T[] vals, Comparator<T> order, int lb, int ub) {
-       //keep track of the highest position of smaller values
+       // keep track of the highest position of smaller values
        int smallPos = lb;
 
        // keep track of the position to swap large numbers into
@@ -86,9 +86,9 @@ public class Quicksorter<T> extends SorterBridge<T> {
        // generate a random pivot between lb and ub inclusive
        Random rand = new Random();
        int pivot = rand.nextInt(ub-lb) + lb;
-       //put the pivot as the first element
+       // put the pivot as the first element
        Utils.swap(vals, lb, pivot);
-       //smallPos is no longer lb
+       // smallPos is no longer lb
        smallPos++;
        
        while(smallPos < largePos) {
@@ -100,11 +100,11 @@ public class Quicksorter<T> extends SorterBridge<T> {
 	   } // else   
        } // while
        
-       //put the pivot in place, need to compart to value at smallPos
+       // put the pivot in place, need to compart to value at smallPos
        if (order.compare(vals[lb], vals[smallPos]) >= 0) {
 	   Utils.swap(vals, lb, smallPos);
 	   return smallPos;
-       } //if
+       } // if
        Utils.swap(vals, lb, smallPos - 1);
        return smallPos - 1;
    } // partition
