@@ -23,6 +23,7 @@ public class IterativeMergeSorter<T> extends SorterBridge<T> {
      *   Subarrays of size size are sorted
      * 
      */
+    @SuppressWarnings("unchecked")
     @Override
     public T[] sorti(T[] vals, Comparator<T> order) {
 	int size = 1;
