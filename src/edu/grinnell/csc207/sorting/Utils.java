@@ -52,6 +52,10 @@ class Utils {
 	count = 0;
     } // resetCount
 
+    public static <T> T[] merge(Comparator<T> order, T[] a1, T[] a2) {
+	return merge(order, a1, 0, a1.length, a2, 0, a2.length);
+    } // merge(Comparator<T>, T[], T[])
+
     /**
      * Merge the values in arrays a1 and a2 into a new array.
      * 
@@ -70,36 +74,41 @@ class Utils {
      *            exists at least one value in both a1 and a2 that have yet to
      *            be compared with one another.
      */
-    public static <T> T[] merge(Comparator<T> order, T[] a1, T[] a2) {
-	T[] result = (T[]) new Object[a1.length + a2.length];
+
+    public static <T> T[] merge(Comparator<T> order, T[] a1, int lb1, int ub1,
+	    T[] a2, int lb2, int ub2) {
+	T[] ay1 = (T[]) new Object[ub1 - lb1];
+	System.arraycopy(a1, lb1, ay1, 0, ub1 - lb1);
+	T[] ay2 = (T[]) new Object[ub2 - lb2];
+	System.arraycopy(a2, lb2, ay2, 0, ub2 - lb2);
+	T[] result = (T[]) new Object[ay1.length + ay2.length];
 	int m = 0;
 	int n = 0;
 	int count = 0;
 	// loop that will go through and return the smallest value from each
 	// array
-	while (m < a1.length && n < a2.length) {
-	    if (order.compare(a1[m], a2[n]) < 0) {
-		result[count++] = a1[m++];
-	    } else if (order.compare(a1[m], a2[n]) >= 0) {
-		result[count++] = a2[n++];
+	while (m < ay1.length && n < ay2.length) {
+	    if (order.compare(ay1[m], ay2[n]) < 0) {
+		result[count++] = ay1[m++];
+	    } else if (order.compare(ay1[m], ay2[n]) >= 0) {
+		result[count++] = ay2[n++];
 	    } // if
 	} // while
 
 	// finishing moves, copy any leftover if one array is exhausted before
 	// the other
-	if (m != a1.length) {
-	    while (m < a1.length) {
-		result[count++] = a1[m++];
+	if (m != ay1.length) {
+	    while (m < ay1.length) {
+		result[count++] = ay1[m++];
 	    } // while
 	} // if
-	if (n != a2.length) {
-	    while (n < a2.length) {
-		result[count++] = a2[n++];
+	if (n != ay2.length) {
+	    while (n < ay2.length) {
+		result[count++] = ay2[n++];
 	    } // while
 	} // if
 	return result;
-
-    } // merge(Comparator<T>, T[], T[])
+    } // merge(Comparator<T>, T[], int, int, T[], int, int)
 
     /**
      * "Randomly" permute an array in place.
@@ -145,8 +154,8 @@ class Utils {
      * @pre 0 <= l <= values.length
      * @pre 0 <= u <= values.length
      */
-    public static <T> boolean sorted(T[] values, Comparator<T> order,
-	    int l, int u) {
+    public static <T> boolean sorted(T[] values, Comparator<T> order, int l,
+	    int u) {
 	for (int i = u - 1; i > l; i--) {
 	    if (order.compare(values[i - 1], values[i]) > 0)
 		return false;
@@ -231,10 +240,9 @@ class Utils {
 	Integer[] vals1 = new Integer[] { 1, 2, 2, 2, 4, 5, 7, 7, 11, 13 };
 
 	// A case that's proven problematic
-	Integer[] vals2 = new Integer[] { 1, 1, 2, 3, 4, 5, 7, 9, 11, 13,
-		13, 0 };
-	checkSorting(pen, new Integer[] { 0, 1, 1, 2, 3, 4, 5, 7, 9, 11,
-		13, 13 }, vals2,
+	Integer[] vals2 = new Integer[] { 1, 1, 2, 3, 4, 5, 7, 9, 11, 13, 13, 0 };
+	checkSorting(pen,
+		new Integer[] { 0, 1, 1, 2, 3, 4, 5, 7, 9, 11, 13, 13 }, vals2,
 		sorter.sort(vals2, StandardIntegerComparator.comparator));
 
 	// Five random permutation experiments seems like enough
@@ -256,8 +264,8 @@ class Utils {
      */
     public static void sExperiments(Sorter<String> sorter) {
 	PrintWriter pen = new PrintWriter(System.out, true);
-	String[] vals1 = new String[] { "a", "b", "b", "f", "g", "g", "w",
-		"x", "y", "z", "z", "z" };
+	String[] vals1 = new String[] { "a", "b", "b", "f", "g", "g", "w", "x",
+		"y", "z", "z", "z" };
 	// Five random permutation experiments seems like enough
 	for (int i = 0; i < 5; i++) {
 	    permutationExperiment(pen, sorter,

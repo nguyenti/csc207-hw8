@@ -70,7 +70,7 @@ public class TestUtils {
      */
     public static <T> void test1(Sorter<Integer> sorter) {
 	testAllPermutations(sorter, StandardIntegerComparator.comparator,
-		new Integer[] { 0, 1, 1, 2, 4, 7, 9, 11, 13, 13 });
+		new Integer[] { 0, 1, 1, 2, 4, 7, 9, 11, 13, 13, 14 });
     } // test1
 
     /**
